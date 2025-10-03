@@ -1,3 +1,5 @@
+version: "3.8"
+
 volumes:
   n8n_storage:
   postgres_storage:
@@ -20,6 +22,13 @@ x-n8n: &service-n8n
     - N8N_ENCRYPTION_KEY
     - N8N_USER_MANAGEMENT_JWT_SECRET
     - OLLAMA_HOST=${OLLAMA_HOST:-ollama:11434}
+    # Added from your ngrok config
+    - GENERIC_TIMEZONE=America/Chicago
+    - TZ=America/Chicago
+    - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USEAGE=true
+    - N8N_EDITOR_BASE_URL=https://unregulatory-berry-lowly.ngrok-free.dev/
+    - WEBHOOK_URL=https://unregulatory-berry-lowly.ngrok-free.dev/
+    - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
   env_file:
     - path: .env
       required: true
@@ -85,11 +94,12 @@ services:
     container_name: n8n
     restart: unless-stopped
     ports:
-      - 5678:5678
+      - 5680:5678   # Changed to 5680 external
     volumes:
       - n8n_storage:/home/node/.n8n
       - ./n8n/demo-data:/demo-data
       - ./shared:/data/shared
+      - /home/pi/Desktop/N8N:/home/node/.n8n
     depends_on:
       postgres:
         condition: service_healthy
@@ -147,4 +157,5 @@ services:
     <<: *init-ollama
     image: ollama/ollama:rocm
     depends_on:
-     - ollama-gpu-amd
+      - ollama-gpu-amd
+
