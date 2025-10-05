@@ -1,10 +1,10 @@
 version: "3.8"
 
 volumes:
-  n8n_storage:
-  postgres_storage:
-  ollama_storage:
-  qdrant_storage:
+  n8n_storage: C:\Users\2022s\OneDrive\Desktop\AI_starter kit\N8n
+  postgres_storage: C:\Users\2022s\OneDrive\Desktop\AI_starter kit\postgres
+  ollama_storage: C:\Users\2022s\OneDrive\Desktop\AI_starter kit\ollama
+  qdrant_storage: C:\Users\2022s\OneDrive\Desktop\AI_starter kit\qdrant
 
 networks:
   demo:
@@ -26,8 +26,8 @@ x-n8n: &service-n8n
     - GENERIC_TIMEZONE=America/Chicago
     - TZ=America/Chicago
     - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USEAGE=true
-    - N8N_EDITOR_BASE_URL=https://unregulatory-berry-lowly.ngrok-free.dev/
-    - WEBHOOK_URL=https://unregulatory-berry-lowly.ngrok-free.dev/
+    - N8N_EDITOR_BASE_URL=https://blakely-polyonymous-unshrewdly.ngrok-free.dev
+    - WEBHOOK_URL=https://blakely-polyonymous-unshrewdly.ngrok-free.dev/
     - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
   env_file:
     - path: .env
